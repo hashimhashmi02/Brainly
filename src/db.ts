@@ -1,5 +1,5 @@
 import mongoose, { model , Schema} from "mongoose";
-
+import { MONGO_URL } from "./config";
 
 mongoose.connect("mongodb+srv://Hashim:CzYMftAtFIwzAgG3@cluster0.1owig.mongodb.net/Brainly")
 // scehma
@@ -39,6 +39,16 @@ const LinkSchema = new Schema({
 })
 
 export const LinkModel = model("Links",LinkSchema);
+
+export async function connectDB() {
+    try {
+        await mongoose.connect(MONGO_URL);
+        console.log("Connected to MongoDB");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+        process.exit(1);
+    }
+}
 
 
 
